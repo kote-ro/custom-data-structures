@@ -14,7 +14,7 @@ import java.util.LinkedList;
 public class RemoveTests {
     private final ListFiller listFiller = new ListFiller();
     private final ListRemover listRemover = new ListRemover();
-    private final int amountOfElements = 100_000;
+    private final int amountOfElements = 10_000;
     private final int index = amountOfElements / 2;
 
     private MyArrayList<String> myArrayList;

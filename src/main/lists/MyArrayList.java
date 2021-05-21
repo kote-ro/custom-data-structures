@@ -1,8 +1,9 @@
 package main.lists;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MyArrayList<T> {
+public class MyArrayList<T> extends ArrayList<T> {
 
     private Object[] arrayOfObjects;
     private int size;
@@ -20,10 +21,11 @@ public class MyArrayList<T> {
     }
 
     public boolean add(T elem) {
-        return add(size, elem);
+        add(size, elem);
+        return true;
     }
 
-    public boolean add(int index, T elem) {
+    public void add(int index, T elem) {
         if(index < 0 || index > size) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -42,34 +44,35 @@ public class MyArrayList<T> {
         } else {
             arrayOfObjects[size++] = elem;
         }
-
-        return true;
     }
 
-    public boolean remove(T elem) {
+    public boolean remove(Object elem) {
         for(int i = 0; i < size; i++) {
             if(arrayOfObjects[i].equals(elem)) {
-                return remove(i);
+                remove(i);
+                break;
             }
         }
 
         return true;
     }
 
-    public boolean remove(int index) {
+    public T remove(int index) {
         if(index < 0 || index > size) {
             throw new ArrayIndexOutOfBoundsException();
         }
+        T oldValue = null;
 
         for(int i = index; i < size - 1; i++) {
             arrayOfObjects[i] = arrayOfObjects[i+1];
+            oldValue = (T) arrayOfObjects[i];
         }
 
 
         arrayOfObjects[size-1] = null;
         size--;
 
-        return true;
+        return oldValue;
     }
 
     private void increaseSize() {
@@ -77,15 +80,15 @@ public class MyArrayList<T> {
         arrayOfObjects = Arrays.copyOf(arrayOfObjects, newCapacity);
     }
 
-    public boolean contains(T elem) {
+    public boolean contains(Object elem) {
         return indexOf(elem) >= 0;
     }
 
-    public int indexOf(T elem) {
+    public int indexOf(Object elem) {
         return indexOfRange(elem, 0, size);
     }
 
-    int indexOfRange(T elem, int start, int end) {
+    private int indexOfRange(Object elem, int start, int end) {
         Object[] es = arrayOfObjects;
         if (elem == null) {
             for (int i = start; i < end; i++) {

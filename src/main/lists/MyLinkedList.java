@@ -1,9 +1,11 @@
 package main.lists;
 
-public class MyLinkedList<T>{
-    Node head;
+import java.util.LinkedList;
 
-    public void add(T elem) {
+public class MyLinkedList<T> extends LinkedList<T> {
+    private Node head;
+
+    public boolean add(T elem) {
         Node newNode = new Node(elem);
         if(head == null) {
             head = newNode;
@@ -14,6 +16,7 @@ public class MyLinkedList<T>{
             }
             n.next = newNode;
         }
+        return true;
     }
 
     public void addAtStart(T elem) {
@@ -38,7 +41,7 @@ public class MyLinkedList<T>{
         }
     }
 
-    public void remove(int index) {
+    public T remove(int index) {
         if(index == 0) {
             head = head.next;
         }else{
@@ -48,17 +51,19 @@ public class MyLinkedList<T>{
             }
             currentNode.next = currentNode.next.next;
         }
+        return null;
     }
 
-    public void remove(T elem){
+    public boolean remove(Object elem){
         remove(indexOf(elem));
+        return true;
     }
 
-    public boolean contains(T elem) {
+    public boolean contains(Object elem) {
         return indexOf(elem) >= 0;
     }
 
-    public int indexOf(T elem) {
+    public int indexOf(Object elem) {
         int index = 0;
         if (elem == null) {
             return index;

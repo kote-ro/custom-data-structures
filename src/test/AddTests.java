@@ -12,7 +12,7 @@ import java.util.LinkedList;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AddTests {
     private final ListFiller listFiller = new ListFiller();
-    private final int amountOfElements = 100_000;
+    private final int amountOfElements = 10_000;
 
     private MyArrayList<String> myArrayList;
     private MyLinkedList<String> myLinkedList;
